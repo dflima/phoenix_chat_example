@@ -7,8 +7,12 @@ defmodule Chat do
     import Supervisor.Spec, warn: false
 
     topologies = [
-      chat: [
-        strategy: Cluster.Strategy.Gossip
+      k8s_chat: [
+        strategy: Cluster.Strategy.Kubernetes.DNS,
+        config: [
+          service: "chat-nodes",
+          application_name: "chat"
+        ]
       ]
     ]
 
