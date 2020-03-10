@@ -6,8 +6,15 @@ defmodule Chat do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    topologies = [
+      chat: [
+        strategy: Cluster.Strategy.Gossip
+      ]
+    ]
+
     children = [
       # Start the endpoint when the application starts
+      {Cluster.Supervisor, [topologies, [name: Chat.ClusterSupervisor]]},
       supervisor(Chat.Endpoint, []),
       # Here you could define other workers and supervisors as children
       # worker(Chat.Worker, [arg1, arg2, arg3]),
