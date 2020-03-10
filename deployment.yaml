@@ -24,7 +24,7 @@ spec:
         - name: PORT
           value: "4000"
         - name: PHOENIX_CHAT_HOST
-          value: "phoenix-chat"
+          value: "45.55.123.53"
         - name: MY_POD_IP
           valueFrom:
             fieldRef:
